@@ -81,8 +81,8 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="right"
             android:layout_marginStart="35dp"
-            android:text="Ir a CUCIénga" 
-            />  <!--utilizado para mostrar y posicionar en el activity el botón "Ir a CUCIénga" -->
+            android:text="Ir a CUCIénega" 
+            />  <!--utilizado para mostrar y posicionar en el activity el botón "Ir a CUCIénega" -->
 
     </LinearLayout>
 </RelativeLayout>
