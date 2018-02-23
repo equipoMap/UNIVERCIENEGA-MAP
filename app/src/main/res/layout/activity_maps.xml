@@ -1,13 +1,16 @@
 
 
 
-
+<!--En este segmento de código (activity) se muestra la disposición o acomodo 
+	de las diferentes vistas en posiciones relativas que se tienen en la app 
+	y de los componentes que se compone (en sí, es la interfaz que se muestra al usuario) (líneas 7 a 88) -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    >
+    >   <!--utilizado para adaptarse al diferentes 
+			tamaños y orientación de la pantalla (ancho y altura) -->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,7 +20,11 @@
         android:layout_marginLeft="10dp"
         android:elevation="10dp"
         android:background="@drawable/white_border"
-        android:id="@+id/relLayout1">
+        android:id="@+id/relLayout1"
+        >   <!--vista secundaria con especifícaciones 
+				en su posicionamiento (la anchura se adapta a la pantalla)
+				se utilza "dp" en la disposición para mostrar el/los elementos
+				uniformemente en pantallas con diferentes densidades-->
 
         <ImageView
             android:layout_width="15dp"
@@ -25,7 +32,8 @@
             android:id="@+id/ic_magnify"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_magnify"/>
+            android:src="@drawable/ic_magnify"
+            />  <!--utilizado para mostrar una imagen (la lupa en el buscador) -->
 
         <EditText
             android:layout_width="match_parent"
@@ -37,7 +45,11 @@
             android:id="@+id/input_search"
             android:background="@null"
             android:hint="Enter Address, City or Zip Code"
-            android:imeOptions="actionSearch"/>
+            android:imeOptions="actionSearch"
+            />  <!--hace referencia al elemento o componente 
+					para efectuar entrada o modificación de texto 
+					con anchura y altura que se adaptan a la pantalla,
+					tamaño de fuente 15 y color de fuente negro-->
 
 
 
@@ -57,7 +69,9 @@
             android:layout_height="340dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/btnAnimar"
-            android:layout_marginTop="118dp" />
+            android:layout_marginTop="118dp" 
+            />  <!--utilizado para la navegación entre pantallas 
+					(cuando se divide un activity para mostrar otro dentro del mismo) -->
 
         <Button
             android:id="@+id/btnAnimar"
@@ -67,7 +81,8 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="right"
             android:layout_marginStart="35dp"
-            android:text="animar" />
+            android:text="Ir a CUCIénga" 
+            />  <!--utilizado para mostrar y posicionar en el activity el botón "Ir a CUCIénga" -->
 
     </LinearLayout>
 </RelativeLayout>
