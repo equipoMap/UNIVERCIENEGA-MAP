@@ -62,46 +62,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /////
 
     //NOMBRES DE CONSTANTES DE LAS UBICACION DE LOS EDIFICIOS
-    static final double latABR = 20.369802;
-    static final double longABR = -102.770099;
-    static final double LongCor= 20.370993;
-    static final double LatCor= -102.770694;
-    static final double latH = 20.370282;
-    static final double longH= -102.770651;
-    static final double latL= 20.370734;
-    static final double longL= -102.770824;
-    static final double latCAF= 20.370849;
-    static final double longCAF= -102.770457;
-    static final double latG= 20.370463;
-    static final double longG= -102.770155;
-    static final double latE= 20.370712;
-    static final double longE= -102.769945;
-    static final double latAd=20.370849;
-    static final double longAd= -102.770457;
-    static final double latD= 20.370967;
-    static final double longD= -102.769657;
-    static final double latRe =20.371153;
-    static final double longRe =-102.768921;
-    static final double latC= 20.371383;
-    static final double longC= -102.769416;
-    static final double latB = 20.371516;
-    static final double longB = -102.768941;
-    static final double latM = 20.371263;
-    static final double longM = -102.770058;
-    static final double latI = 20.371654;
-    static final double longI = -102.770343;
-    static final double latF = 20.371087;
-    static final double longF = -102.770459;
-    static final double latLabIngIndustrial = 20.371087;
-    static final double longLabIngIndustrial = -102.770459;
-    static final double latServiciosGenerales = 20.371330;
-    static final double longServiciosGenerales = -102.770345;
-    static final double latO = 20.371954;
-    static final double longO = -102.770427;
-    static final double latBiblioteca = 20.372060;
-    static final double longBiblioteca = -102.769634;
-    static final double latP = 20.372061;
-    static final double longP = -102.769635;
+    private static final LatLng EDIF_H = new LatLng(20.370226, -102.770565);
+    private static final LatLng EDIF_L = new LatLng(20.370727, -102.770804);
+    private static final LatLng EDIF_G = new LatLng(20.370463, -102.770155 );
+    private static final LatLng EDIF_E = new LatLng(20.370712, -102.769945 );
+    private static final LatLng EDIF_D = new LatLng(20.370967, -102.769657 );
+    private static final LatLng EDIF_C = new LatLng(20.371383, -102.769416 );
+    private static final LatLng EDIF_B = new LatLng(20.371516, -102.768941 );
+    private static final LatLng EDIF_M = new LatLng(20.371263, -102.770058  );
+    private static final LatLng EDIF_I = new LatLng(20.371654, -102.770343 );
+    private static final LatLng EDIF_F = new LatLng(20.371087, -102.770459  );
+    private static final LatLng EDIF_O = new LatLng(20.371954, -102.770427   );
+    private static final LatLng EDIF_P = new LatLng(20.372628, -102.771223 );
+    private static final LatLng EDIF_RECTORIA = new LatLng(20.371153, -102.768921  );
+    private static final LatLng CANCHA_FUTBOL = new LatLng(20.371093, -102.771514 );
+    private static final LatLng EDIF_LAB_ING_INDUSTRIAL = new LatLng(20.371222, -102.770385  );
+    private static final LatLng EDIF_SER_GENERALES = new LatLng(20.371330, -102.770345   );
+    private static final LatLng CAFETERIA = new LatLng(20.370849, -102.770457);
+    private static final LatLng EDIF_COORDINACION = new LatLng(20.371026, -102.770726);
+    private static final LatLng LAB_BMV = new LatLng(20.370914, -102.772843);
+
+    private Marker eH;
+    private Marker eL;
+    private Marker eG;
+    private Marker eE;
+    private Marker eD;
+    private Marker eC;
+    private Marker eB;
+    private Marker eM;
+    private Marker eI;
+    private Marker eF;
+    private Marker eO;
+    private Marker eP;
+    private Marker eRECTORIA;
+    private Marker eCFUTBOL;
+    private Marker eLAB_ING_INDUSTRIAL;
+    private Marker eSER_GENERALES;
+    private Marker eCAFETERIA;
+    private Marker eCOORDINACION;
+    private Marker eLABBMV;
+
     //FIN DE CONSTANTES
 
 
@@ -155,15 +155,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                              Log.d(TAG, "geoLocate: found a location: " + address.toString());
                                              //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
 
-                                             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
-                                             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
-                                             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
-                                                     address.getAddressLine(0));
+                                             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                                             mMap.addMarker(new MarkerOptions().position(EDIF_P).title("EDIFICIO P"));
+                                             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, address.getAddressLine(0));
                                          }
 
                                          // Ocultar el teclado
-                                         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                                         imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                                         hideSoftKeyboard();
+
                                      }
         });
     }
@@ -277,69 +276,85 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.animateCamera(camUpd3);
 
- //Marcadores
+         //Marcadores
 
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latL, longL ))
-                .title("EDIF L")
+        eH = mMap.addMarker(new MarkerOptions()
+                .position( EDIF_H)
+                .title("EDIF H")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latG, longG ))
-                .title("EDIF G")
+        eL = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_L)
+                        .title("EDIF L")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eG = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_G)
+                        .title("EDIF G")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eE = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_E)
+                        .title("EDIF E")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eD = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_D)
+                        .title("EDIF D")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eC = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_C)
+                        .title("EDIF C")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eB = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_B)
+                        .title("EDIF B")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eM = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_M)
+                        .title("EDIF M")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eI = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_I)
+                        .title("EDIF I")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eF = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_F)
+                        .title("EDIF F")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eO = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_O)
+                        .title("EDIF O")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eP = mMap.addMarker(new MarkerOptions()
+                        .position( EDIF_P)
+                        .title("EDIF P")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eRECTORIA = mMap.addMarker(new MarkerOptions()
+                .position( EDIF_RECTORIA)
+                .title("EDIF RECTORIA")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latCAF, longCAF ))
-                .title("CAFETERIA")
+        eCFUTBOL = mMap.addMarker(new MarkerOptions()
+                .position( CANCHA_FUTBOL)
+                .title("CANCHA DE FUTBOL")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latRe, longRe ))
-                .title("RECTORIA")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latC, longC ))
-                .title("EDIF C")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(LatCor, LongCor ))
-                .title("COORDINACION")
+        eLAB_ING_INDUSTRIAL = mMap.addMarker(new MarkerOptions()
+                        .position(EDIF_LAB_ING_INDUSTRIAL)
+                        .title("LABORATORIO DE ING INDUSTRIAL")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eSER_GENERALES = mMap.addMarker(new MarkerOptions()
+                        .position(EDIF_SER_GENERALES)
+                        .title("EDIF SERVICIOS GENERALES")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eCAFETERIA = mMap.addMarker(new MarkerOptions()
+                        .position(CAFETERIA)
+                        .title("CAFETERIA")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eCOORDINACION = mMap.addMarker(new MarkerOptions()
+                        .position(EDIF_COORDINACION)
+                        .title("EDIF COORDINACION-ADMINISTRACION")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
+        eLABBMV = mMap.addMarker(new MarkerOptions()
+                .position(LAB_BMV)
+                .title("Laboratorio de Biología Molecular Vegetal")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
 
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latB, longB))
-                .title("EDIF B")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latM, longM))
-                .title("EDIF M")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latI, longI))
-                .title("EDIF I")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latF, longF))
-                .title("EDIF F")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latLabIngIndustrial, longLabIngIndustrial))
-                .title("Lab. Ing. Ind.")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latServiciosGenerales, longServiciosGenerales))
-                .title("Servicios Grales.")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latO, longO))
-                .title("EDIF O")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latBiblioteca, longBiblioteca))
-                .title("Biblioteca")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latP, longP))
-                .title("EDIF P")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.edif0d)));
         //Marcadores
     }
 
